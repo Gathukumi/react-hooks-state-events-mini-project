@@ -1,31 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 function NewTaskForm({ categories, onTaskFormSubmit }) {
-  const [text, setText] = useState('');
-  const [category, setCategory] = useState('Category1'); // Set a default category
+  // Implement state to capture form input
+  const [newTask, setNewTask] = useState({ text: "", category: categories[0] });
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    // Create a new task object with the 'text' and 'category' state
-    // Call the onTaskFormSubmit callback to add the new task to the list
+    // Pass the new task to the callback prop
+    onTaskFormSubmit(newTask);
+    // Reset the form
+    setNewTask({ text: "", category: categories[0] });
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNewTask({ ...newTask, [name]: value });
   };
 
   return (
-    <form onSubmit={handleFormSubmit}>
-      <input
-        type="text"
-        placeholder="Task text"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-      />
-      <select value={category} onChange={(e) => setCategory(e.target.value)}>
-        {categories.map((cat) => (
-          <option key={cat} value={cat}>
-            {cat}
-          </option>
-        ))}
-      </select>
-      <button type="submit">Add Task</button>
+    <form className="new-task-form" onSubmit={handleFormSubmit}>
+      <label>
+        Details
+        <input
+          type="text"
+          name="text"
+          value={newTask.text}
+          onChange={handleInputChange}
+        />
+      </label>
+      <label>
+        Category
+        <select
+          name="category"
+          value={newTask.category}
+          onChange={handleInputChange}
+        >
+          {categories.map((category, index) => (
+            <option key={index} value={category}>
+              {category}
+            </option>
+          ))}
+        </select>
+      </label>
+      <input type="submit" value="Add task" />
     </form>
   );
 }

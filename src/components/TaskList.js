@@ -1,14 +1,14 @@
-import React from 'react';
-import Task from './Task';
-
+import React from "react";
+import Task from "./Task";
 function TaskList({ tasks }) {
   return (
-    <div>
-      {tasks.map((task) => (
-        <Task key={task.id} task={task} />
+    <div className="tasks">
+      {tasks.map((task, index) => (
+        <Task key={index} task={task} />
       ))}
     </div>
   );
 }
+
 
 export default TaskList;

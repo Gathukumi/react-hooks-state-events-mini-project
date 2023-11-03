@@ -1,27 +1,19 @@
-import React, { useState } from 'react';
-import CategoryFilter from './CategoryFilter';
-import TaskList from './TaskList';
-import NewTaskForm from './NewTaskForm';
+import React from "react";
+import CategoryFilter from "./CategoryFilter";
+import NewTaskForm from "./NewTaskForm";
+import TaskList from "./TaskList";
+import { CATEGORIES, TASKS } from "../data"; // Import the data only once
+
+console.log("Here's the data you're working with");
+console.log({ CATEGORIES, TASKS });
 
 function App() {
-  const [tasks, setTasks] = useState([
-    // Your task data array
-  ]);
-  const categories = [
-    'All', 'Category1', 'Category2', 'Category3', // Add your categories
-  ];
-
   return (
-    <div>
-      <CategoryFilter categories={categories} />
-      <TaskList tasks={tasks} />
-      <NewTaskForm
-        categories={categories}
-        onTaskFormSubmit={(newTask) => {
-          // Handle adding a new task to the tasks array
-          // You should update the 'tasks' state with the new task
-        }}
-      />
+    <div className="App">
+      <h2>My tasks</h2>
+      <CategoryFilter  categories={CATEGORIES} />
+      <NewTaskForm categories={CATEGORIES} />
+      <TaskList tasks={TASKS} />
     </div>
   );
 }

@@ -1,16 +1,20 @@
-import React from 'react';
+import React from "react";
 
 function Task({ task }) {
-  const handleDelete = () => {
-    // Implement a function to remove the task from the list
+  const { text, category } = task;
+
+  const handleDeleteClick = () => {
+    // Implement task deletion logic here
   };
 
   return (
-    <div>
-      <p>{task.text} - {task.category}</p>
-      <button onClick={handleDelete}>Delete</button>
+    <div className="task">
+      <div className="label">{category}</div>
+      <div className="text">{text}</div>
+      <button className="delete" onClick={handleDeleteClick}>X</button>
     </div>
   );
 }
+
 
 export default Task;
